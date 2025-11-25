@@ -147,4 +147,59 @@ WHITESPACE AND COMMENTS:
 - This allows for readable, documented Flux code
 
 
-END OF REFERENCE GUIDE
+FLUX COMPILER AND VIRTUAL MACHINE
+
+
+COMPILE
+
+   go build -o flux flux.go
+
+
+USAGE
+    
+    flux <command> [arguments]
+
+COMMANDS
+    
+    help              Show this help message
+    guide             Show beginner's tutorial and user guide
+    reference         Show complete language reference (also: ref)
+    examples          Show example programs with explanations
+    demo              Run interactive demonstration programs
+    run <file>        Compile and execute a Flux program
+    compile <file>    Compile program and show bytecode
+    interactive       Start interactive REPL (also: repl)
+
+QUICK REFERENCE
+
+    '+'    Increment accumulator       
+    '*'    Push to stack
+    '-'    Decrement accumulator       
+    '/'    Pop from stack
+    '['    Start loop (if acc != 0)   
+    ']'    End loop (jump if acc != 0)
+    '.'    Output as ASCII             
+    ','    Input character
+    '#'    Output as number
+
+
+GETTING STARTED
+    1. Run 'flux guide' for a beginner-friendly tutorial
+    2. Try 'flux demo' to see example programs in action
+    3. View 'flux examples' for commented program samples
+    4. Read 'flux reference' for complete documentation
+
+
+EXAMPLE
+
+    Create a file 'hello.flux':
+    
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.
+        ++++++++++++++++++++++++++++++++.
+
+    Run it:
+        flux run hello.flux
+
+    Output:
+        Hi
+
