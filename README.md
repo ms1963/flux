@@ -54,12 +54,14 @@ ARITHMETIC OPERATIONS:
 
 
 '+'    Increment accumulator
+
      Effect: accumulator = accumulator + 1
      Example: If acc=5, then after '+' acc=6
 
      
 
 '-'    Decrement accumulator
+
      Effect: accumulator = accumulator - 1
      Example: If acc=5, then after '-' acc=4
 
@@ -69,6 +71,7 @@ STACK OPERATIONS:
 
 
 '*'    Push accumulator to stack
+
      Effect: stack.push(accumulator)
      The accumulator value is copied to the top of the stack
      The accumulator itself remains unchanged
@@ -77,6 +80,7 @@ STACK OPERATIONS:
      
 
 '/'    Pop stack to accumulator
+
      Effect: accumulator = stack.pop()
      If stack is empty, accumulator becomes 0
      The value is removed from the stack
@@ -85,7 +89,10 @@ STACK OPERATIONS:
      
 
 CONTROL FLOW OPERATIONS:
+
+
 '['    Begin while loop
+
      If accumulator == 0, jump forward past the matching ']'
      If accumulator != 0, continue execution into the loop body
      The loop condition is checked only at the '[', not continuously
@@ -95,6 +102,7 @@ CONTROL FLOW OPERATIONS:
      
 
 ']'    End while loop
+
      If accumulator != 0, jump backward to the matching '['
      If accumulator == 0, continue execution past the loop
      This creates a while-loop structure that continues as long as acc != 0
@@ -107,6 +115,7 @@ INPUT/OUTPUT OPERATIONS:
 
 
 '.'    Output accumulator as ASCII character
+
      Prints the character corresponding to (accumulator mod 256)
      Example: If acc=65, outputs 'A'
      If acc=72, outputs 'H'
@@ -114,6 +123,7 @@ INPUT/OUTPUT OPERATIONS:
      
 
 ','    Input one character
+
      Reads a single character from input stream
      Sets accumulator to the ASCII value of that character
      On EOF (end of file), sets accumulator to 0
@@ -122,6 +132,7 @@ INPUT/OUTPUT OPERATIONS:
      
 
 '#'    Output accumulator as decimal number
+
      Prints the numeric value of the accumulator
      This is an extension for practical debugging and numeric output
      Example: If acc=42, outputs "42"
@@ -135,6 +146,5 @@ WHITESPACE AND COMMENTS:
 - Any character that is not one of the 9 operations is treated as a comment
 - This allows for readable, documented Flux code
 
-- 
 
 END OF REFERENCE GUIDE
