@@ -1,18 +1,25 @@
 # FLUX PROGRAMMING LANGUAGE - COMPLETE REFERENCE GUIDE
 
+
+
 ## OVERVIEW
+
 
 Flux is a minimal, stack-based esoteric programming language that achieves
 Turing completeness with only 9 core operations. It features a single
 accumulator register and an unbounded stack, making it capable of universal
 computation despite its extreme minimalism.
 
+
 The language is designed to demonstrate that complex computational behavior
 can emerge from simple, well-chosen primitives. Every operation in Flux has
 a clear, unambiguous meaning, and there are no hidden mechanisms or implicit
 behaviors.
 
+
+
 ## LANGUAGE PHILOSOPHY
+
 
 Flux adheres to these core design principles:
 
@@ -28,7 +35,10 @@ Flux adheres to these core design principles:
    completely, yet powerful enough to demonstrate fundamental concepts of
    computation and compiler design.
 
+   
+
 ## COMPUTATIONAL MODEL
+
 
 Flux programs operate on two primary data structures:
 
@@ -45,6 +55,8 @@ STACK:
 - Provides the primary means of data persistence between operations
 - Can grow without limit (constrained only by available memory)
 - Popping from an empty stack yields zero (graceful degradation)
+  
+
 
 ## OPERATION REFERENCE
 
@@ -150,16 +162,18 @@ WHITESPACE AND COMMENTS:
 FLUX COMPILER AND VIRTUAL MACHINE
 
 
-COMPILE
 
-   go build -o flux flux.go
+COMPILE with:  go build -o flux flux.go
 
 
 USAGE
+
     
     flux <command> [arguments]
+    
 
 COMMANDS
+
     
     help              Show this help message
     guide             Show beginner's tutorial and user guide
@@ -169,8 +183,10 @@ COMMANDS
     run <file>        Compile and execute a Flux program
     compile <file>    Compile program and show bytecode
     interactive       Start interactive REPL (also: repl)
+    
 
 QUICK REFERENCE
+
 
     '+'    Increment accumulator       
     '*'    Push to stack
@@ -184,6 +200,8 @@ QUICK REFERENCE
 
 
 GETTING STARTED
+
+
     1. Run 'flux guide' for a beginner-friendly tutorial
     2. Try 'flux demo' to see example programs in action
     3. View 'flux examples' for commented program samples
