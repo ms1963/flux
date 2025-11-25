@@ -1,0 +1,2 @@
+Some stack operations
++++*++*/#/#
