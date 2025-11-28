@@ -274,49 +274,41 @@ func NewVM(instructions []Instruction, input io.Reader, output io.Writer) *VM {
 // Run executes the bytecode program from start to finish
 // Returns an error if any runtime error occurs (typically I/O errors)
 func (vm *VM) Run() error {
-    // Main execution loop: fetch, decode, execute
     for vm.pc < len(vm.instructions) {
         inst := vm.instructions[vm.pc]
+        jumped := false  // Track if we jumped
 
-        // Decode and execute the instruction
         switch inst.Op {
         case OpInc:
-            // Increment: acc = acc + 1
             vm.accumulator++
 
         case OpDec:
-            // Decrement: acc = acc - 1
             vm.accumulator--
 
         case OpPush:
-            // Push: stack.push(acc)
             vm.stack = append(vm.stack, vm.accumulator)
 
         case OpPop:
-            // Pop: acc = stack.pop() or 0 if empty
             if len(vm.stack) > 0 {
                 vm.accumulator = vm.stack[len(vm.stack)-1]
                 vm.stack = vm.stack[:len(vm.stack)-1]
             } else {
-                // Graceful degradation: popping empty stack yields 0
                 vm.accumulator = 0
             }
 
         case OpLoop:
-            // Loop start: if acc == 0, jump past loop
             if vm.accumulator == 0 {
-                vm.pc = inst.Arg // Jump to instruction after matching ]
+                vm.pc = inst.Arg
+                jumped = true  // We jumped, don't increment pc
             }
 
         case OpEnd:
-            // Loop end: if acc != 0, jump back to loop start
             if vm.accumulator != 0 {
-                vm.pc = inst.Arg // Jump back to matching [
+                vm.pc = inst.Arg
+                jumped = true  // We jumped, don't increment pc
             }
 
         case OpOut:
-            // Output as ASCII character
-            // Use modulo 256 to handle values outside byte range
             char := byte(vm.accumulator % 256)
             _, err := vm.output.Write([]byte{char})
             if err != nil {
@@ -324,39 +316,35 @@ func (vm *VM) Run() error {
             }
 
         case OpIn:
-            // Input one character
             buf := make([]byte, 1)
             n, err := vm.input.Read(buf)
             if err != nil && err != io.EOF {
                 return fmt.Errorf("input error: %v", err)
             }
             if err == io.EOF || n == 0 {
-                // EOF: set accumulator to 0
                 vm.accumulator = 0
             } else {
-                // Store ASCII value in accumulator
                 vm.accumulator = int(buf[0])
             }
 
         case OpOutNum:
-            // Output as decimal number
             _, err := fmt.Fprintf(vm.output, "%d", vm.accumulator)
             if err != nil {
                 return fmt.Errorf("output error: %v", err)
             }
 
         default:
-            // This should never happen if compiler is correct
             return fmt.Errorf("internal error: invalid opcode %d at position %d", inst.Op, vm.pc)
         }
 
-        // Advance to next instruction
-        vm.pc++
+        // Only increment pc if we didn't jump
+        if !jumped {
+            vm.pc++
+        }
     }
 
     return nil
 }
-
 
 // Main function: Entry point for the Flux compiler
 func main() {
